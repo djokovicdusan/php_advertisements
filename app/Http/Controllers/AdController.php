@@ -167,5 +167,16 @@ class AdController extends Controller
 
         return view('admin/carousel', ['ad' => $ad, 'adItem' => $currentAdItem, 'refreshInterval' => $adsAdItemDurationCarousel, 'adItemStartTime' => $adsAdItemStartTime]);
     }
+    public function getAd(Request $request){
+//        dd($request);
+        $startTime = Carbon::parse($request->get('start_time'));
+//        dd($startTime);
+        $ad = Ad::where('start_time', '=', $startTime)-> first();
+//        dd($ad);
+//        dd($startTime);
+
+        return view('admin/adDetails',['ad' => $ad]);
+
+    }
 
 }

@@ -18,14 +18,13 @@ var id;
 // });
 
 // if(isAdmin == 1) {
-// $(function () {
-//     // alert('ucitano!')
-//     $("#goToCreate").click(function () {
-//         $("input[name^=_method]").val("GET");
-//         $("#userForm").attr("action", window.location + "/create");
-//         $("#userButton").click();
-//     });
-// });
+$(function () {
+    $("#goToCreate").click(function () {
+        $("input[name^=_method]").val("GET");
+        $("#userForm").attr("action", window.location + "/create");
+        $("#userButton").click();
+    });
+});
 
 // }else{
 //     $("#goToCreate").hide();
@@ -151,7 +150,7 @@ $("#btnForGenerate").click(function () {
 
 var table = $(".js-dataTable-full-pagination").DataTable({
     aaSorting: [],
-    pagingType: "full_numbers",
+    pagingType: "simple_numbers",
     pageLength: 20,
     lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],
     autoWidth: 1,

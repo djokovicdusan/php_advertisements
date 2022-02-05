@@ -37,3 +37,5 @@ Route::get('/ads/all', [AdController::class,'allAds'])->name('ads.all');
 Route::get('/ads/create', [AdController::class,'addAds'])->name('ads.add');
 Route::get('/ads/items', [AdController::class,'items'])->name('ads.items');
 
+Route::get('/ads/details', [AdController::class,'getAd'])->name('ads.get');
+
