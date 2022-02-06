@@ -29,7 +29,7 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Tip reklame', 'Broj korišćenja'],
-		  <?php echo $chartData2?>
+		      <?php echo $chartData2?>
         ]);
 
         var options = {
@@ -41,11 +41,47 @@
         chart.draw(data, options);
       }
     </script>
+
+    <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Broj ponavljanja", "Broj reklama"],
+        <?php echo $chartData3 ?>
+      ]);
+
+
+      // var view = new google.visualization.DataView(data);
+      // view.setColumns([0, 1,
+      //                  { calc: "stringify",
+      //                    sourceColumn: 1,
+      //                    type: "string",
+      //                    role: "annotation" },
+      //                  2]);
+
+      var options = {
+        title: "Statistika broja ponavljanja reklama",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('barchart_values'));
+      chart.draw(data, options);
+  }
+  </script>
+
   </head>
   <body>
 	<div class="d-flex justify-content-around align-items-center align-self-center flex-row">
-    <div id="piechart_3d" style="width: 900px; height: 500px;" ></div>
-	<div id="donutchart" style="width: 900px; height: 500px;"></div>
+    <div class="d-flex justify-content-around align-items-center align-self-center flex-column">
+      <div id="piechart_3d" style="width: 800px; height: 400px;" ></div>
+	    <div id="donutchart" style="width: 800px; height: 400px;"></div>
+    </div>
+      <div id="barchart_values" style="width: 800px; height: 400px;"></div>
 	</div>
   </body>
 </html>

@@ -78,7 +78,7 @@
             <x-responsive-nav-link :href="route('ads')" :active="request()->routeIs('ads')">
                 {{ __('All ads') }}
             </x-responsive-nav-link>
-        </div>
+        </div>>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

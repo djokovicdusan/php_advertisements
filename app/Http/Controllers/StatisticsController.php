@@ -21,7 +21,15 @@ class StatisticsController extends Controller
             $chartData2.="['".$list->type_name."', ".$list->type_count."],";
         }
         $arr['chartData2']=rtrim($chartData2,",");
-        
+
+         
+        $result3 = DB::select(DB::raw("SELECT count(*) as cycle_num, number_of_cycles FROM ads_ad_items GROUP BY number_of_cycles"));
+        $chartData3 = "";
+        foreach($result3 as $list){
+            $chartData3.="['".$list->number_of_cycles."', ".$list->cycle_num."],";
+        }
+        $arr['chartData3']=rtrim($chartData3,",");
+
         return view('components/statistics', $arr);
     }
 }
