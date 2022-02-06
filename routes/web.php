@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\AdItemController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatisticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/statistics', [StatisticsController::class, 'index']);
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
