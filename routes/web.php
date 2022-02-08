@@ -16,7 +16,7 @@ use App\Http\Controllers\StatisticsController;
 |
 */
 
-Route::get('/statistics', [StatisticsController::class, 'index']);
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,4 +48,4 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 });
-
+Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
