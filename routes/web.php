@@ -48,4 +48,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 });
-Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
+Route::middleware(['role:admin'])->group(function () {
+    //password
+    Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
+});
+
