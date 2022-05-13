@@ -100,20 +100,13 @@ class AdController extends Controller
 
     public function carousel()
     {
-        $now = Carbon::now()->addHour();
-
-//dd($now);
-//$ad= Ad::all();
-        $ad = Ad::where('start_time', '<', $now)->where('end_time', '>', $now)->first();
+        $now = Carbon::now()->addHour()->addHour();
+//        $now = Carbon::now()->addHour();
 //        dd($now);
-//        $ad = Ad::where([
-//            ['start_time', '<', $now],['end_time', '>', $now]
-//        ])->first();
-//        dd($ad);
+        $ad = Ad::where('start_time', '<', $now)->where('end_time', '>', $now)->first();
+
         if ($ad == null) {
             $ad = Ad::where('name', 'defaultAd')->first();
-//            dd($ad->adsAdItem[0]->adItem->duration);
-
 
             return view('admin/carousel', ['ad' => $ad, 'adItem' => $ad->adsAdItem[0]->adItem, 'refreshInterval' => $ad->adsAdItem[0]->adItem->duration, 'adItemStartTime' => 0]);
         }
@@ -126,11 +119,6 @@ class AdController extends Controller
         $currentAdItem = null;
 
         foreach ($ad->adsAdItem as $adsAdItem) {
-
-//            $adsAdItemLength = 0;
-//            foreach ($adsAdItem->adItem as $adItem) {
-//                $adsAdItemLength+=$adsAdItem->adItem->duration;
-//            }
 
             $adItem = $adsAdItem->adItem;
             $duration = $adItem->duration;
@@ -164,18 +152,22 @@ class AdController extends Controller
             }
 
         }
-
-        return view('admin/carousel', ['ad' => $ad, 'adItem' => $currentAdItem, 'refreshInterval' => $adsAdItemDurationCarousel, 'adItemStartTime' => $adsAdItemStartTime]);
+//        dd($adItem);
+        return view('admin/carousel', ['adItem' => $currentAdItem, 'refreshInterval' => $adsAdItemDurationCarousel, 'adItemStartTime' => $adsAdItemStartTime]);
     }
-    public function getAd(Request $request){
+
+
+
+    public function getAd(Request $request)
+    {
 //        dd($request);
         $startTime = Carbon::parse($request->get('start_time'));
 //        dd($startTime);
-        $ad = Ad::where('start_time', '=', $startTime)-> first();
+        $ad = Ad::where('start_time', '=', $startTime)->first();
 //        dd($ad);
 //        dd($startTime);
 
-        return view('admin/adDetails',['ad' => $ad]);
+        return view('admin/adDetails', ['ad' => $ad]);
 
     }
 

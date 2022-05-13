@@ -21,26 +21,24 @@
 <input id="carouselStartTime" type="number" value="{{$adItemStartTime}}" hidden>
 
 
-    @if($adItem->type_id == 1)
-        {{--            ubaciti kao video--}}
-        <video id="videoCarousel" controls loop autoplay muted class="d-block w-100" alt="First slide"
-               style="overflow: hidden">
-            <source src="{{asset('/assets/ads/video/'.$adItem->file_name)}}">
-        </video>
-    @else
+@if($adItem->type_id == 1)
+    {{--            ubaciti kao video--}}
+    <video id="videoCarousel" controls loop autoplay muted class="d-block w-100" alt="First slide"
+           style="overflow: hidden">
+        <source src="{{asset('/assets/ads/video/'.$adItem->file_name)}}">
+    </video>
+@else
 
-        <div id="SmallCarousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                @foreach($adItem->files as $key => $file)
-                    <div class="carousel-item {{ $key==0 ? "active" : "" }}">
-                        <img class="d-block w-100" src="{{ asset('../storage/app/public/'.$file) }}">
-                    </div>
-                @endforeach
-            </div>
+    <div id="SmallCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach($adItem->files as $key => $file)
+                <div class="carousel-item {{ $key==0 ? "active" : "" }}">
+                    <img class="d-block w-100" src="{{ asset('../storage/app/public/'.$file) }}">
+                </div>
+            @endforeach
         </div>
+    </div>
     @endif
-    {{--        @endforeach--}}
-
     </div>
 
 </body>

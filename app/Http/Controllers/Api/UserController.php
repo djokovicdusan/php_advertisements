@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,7 @@ class UserController extends Controller
         $user = User::create([
             'first_name' => ucfirst(request('first_name')),
             'last_name' => ucfirst(request('last_name')),
-            'email' => ucfirst(request('email')),
+            'email' => request('email'),
             'password' => bcrypt(request('password')),
         ]);
 
@@ -48,23 +49,32 @@ class UserController extends Controller
         return response()->json(['date' => $user, 'access_token' => $token, 'token_type' => 'Bearer']);
     }
 
-    public function login(Request $request) {
-//        if (!Auth::attempt($request->only('email', 'password'))) {
-//            return response()->json(['message' => 'Unauthorized'], 401);
-//        }
+    public function login(Request $request): JsonResponse
+    {
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $title = 'Error title unauthorized';
+            $message = 'Error title unauthorized';
+            return response()->json(compact('title', 'message'), 401);
+        }
 
-        $user = User::where('email', $request->email)->first();
-        $acces_token = $user->createToken('auth_token')->plainTextToken;
-
-        $message = 'Uspešno logovanje na sistem!';
-
-        return response()->json(compact('acces_token', 'user', 'message'), 200);
+        $user = Auth::user();
+        $token = $user->createToken('Login')->plainTextToken;
+        $title = 'Success';
+        $message = 'User login successful.';
+        return response()->json(compact('title', 'message', 'token',),200);
     }
 
-    public function logout() {
-        auth()->logout();
-        $message = "Uspešno ste se odjavili sa sistema!";
-        return response()->json(compact('message'), 200);
+    public function logout(Request $request) {
+//        auth()->logout();
+//        $message = "Uspešno ste se odjavili sa sistema!";
+//        return response()->json(compact('message'), 200);
+        Auth::guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->json([], 204);
     }
 
     public function update(Request $request)

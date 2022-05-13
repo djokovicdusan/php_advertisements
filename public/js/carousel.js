@@ -4,13 +4,13 @@ function refresh() {
 }
 
 // sample comment
-$(document).ready(function() {
+$(document).ready(function () {
     $('#SmallCarousel').carousel({
-        interval: parseInt($('#carouselInterval').val())* 1000,
-        cycle:true,
-        pause:false
+        interval: parseInt($('#carouselInterval').val()) * 1000,
+        cycle: true,
+        pause: false
     });
-    var interval = parseInt($('#refreshInterval').val())*1000;
+    var interval = parseInt($('#refreshInterval').val()) * 1000;
     // alert(interval);
     console.log(interval);
     window.setInterval('refresh()', interval);
@@ -18,13 +18,9 @@ $(document).ready(function() {
     // $('#videoCarousel').on('loadedmetadata', function () {
     //     alert('ok')
     var video = $('#videoCarousel');
-    if(typeof  video.get(0) !='undefined'){
+    if (typeof video.get(0) != 'undefined') {
         video.get(0).currentTime = parseInt($('#carouselStartTime').val());
     }
-
-    // },false);// Call a function every 10000 milliseconds (OR 10 seconds).
-
-    // document.getElementById('vid1').addEventListener('loadedmetadata', function() {
 
 });
 

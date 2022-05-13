@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdController;
 use App\Http\Controllers\AdItemController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatisticsController;
 
@@ -45,6 +46,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/ads/create', [AdController::class,'addAds'])->name('ads.add');
     Route::get('/ads/items', [AdController::class,'items'])->name('ads.items');
     Route::get('/ads/details', [AdController::class,'getAd'])->name('ads.get');
+    Route::get('/storage', function () {
+        Artisan::call('storage:link');
+    });
 
 
 });
