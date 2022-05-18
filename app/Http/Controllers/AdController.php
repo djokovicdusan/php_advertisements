@@ -8,6 +8,7 @@ use App\Models\AdItem;
 use App\Models\AdsAdItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class AdController extends Controller
@@ -169,6 +170,14 @@ class AdController extends Controller
 
         return view('admin/adDetails', ['ad' => $ad]);
 
+    }
+    public function destroy(Ad $ad)
+    {
+//        dd($ad);
+        $ad->delete();
+
+        Session::flash('success', 'You have successfully deleted the ad!');
+        return redirect('/ads');
     }
 
 }

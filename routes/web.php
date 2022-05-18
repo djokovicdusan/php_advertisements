@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/ads/adItem', [AdController::class,'adItem'])->name('adItem');
     Route::post('/ads/adItem/store',[AdItemController::class,'store'])->name('adItem.store');
     Route::post('/store',[AdController::class,'store'])->name('ad.store');
+    Route::post('/ads/destroy/{ad}',[AdController::class,'destroy'])->name('ad.destroy');
     Route::get('/ads', [AdController::class,'index'])->name('ads');
     Route::get('/ads/all', [AdController::class,'allAds'])->name('ads.all');
     Route::get('/ads/create', [AdController::class,'addAds'])->name('ads.add');

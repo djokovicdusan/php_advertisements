@@ -6,29 +6,13 @@
     </x-slot>
 
 
-{{--    <!-- Hero -->--}}
-{{--    <div class="bg-body-light">--}}
-{{--        <div class="content content-full">--}}
-{{--            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">--}}
-{{--                <h1 class="flex-sm-fill h3 my-2">  s</h1>--}}
-{{--                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">--}}
-{{--                    <ol class="breadcrumb breadcrumb-alt">--}}
-{{--                        <li class="breadcrumb-item">App</li>--}}
-{{--                        <li class="breadcrumb-item" aria-current="page">--}}
-{{--                            <a class="link-fx" href="">Ad Details</a>--}}
-{{--                        </li>--}}
-{{--                    </ol>--}}
-{{--                </nav>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--    <!-- END Hero -->--}}
-
     <!-- Page Content -->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <input hidden value="{{ $ad }}" id="ad">
+                    <input hidden type="text" value="{{ route('ad.destroy', 0) }}" id="route-url" />
                     <div class="content">
 
 
@@ -58,6 +42,12 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <form action="{{ route('ad.destroy',$ad) }}" method="POST" id="route-appender">
+                            @csrf
+                            <button type="submit" onclick="return myFunction();" class="btn btn-danger w-24">Delete</button>
+                        </form>
+
 
                         {{--        <a href="{{ route('adItem')}}" class="btn btn-primary">Ad item</a>--}}
 
@@ -98,5 +88,10 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
 
-
+<script>
+    function myFunction() {
+        if(!confirm("Are you sure you want to delete this ad?"))
+            event.preventDefault();
+    }
+</script>
 
