@@ -32,9 +32,9 @@
                                 <p hidden>{{$num=1}}</p>
                                 @foreach($ad->adsAdItem as $adsAdItem)
 
-                                    <tr id="user_{{ $ad->id }}" class="gradeX single">
-                                        <td class="font-w600 font-size-sm">{{$num++}}</td>
-                                        <td class="font-w600 font-size-sm">{{$adsAdItem->adItem->file_name}}</td>
+                                    <tr id="user_{{ $ad->id }}" class="gradeX single pe-auto">
+                                        <td >{{$num++}}</td>
+                                        <td class="">{{$adsAdItem->adItem->file_name}}</td>
 
                                         <td class="font-w600 font-size-sm">{{$adsAdItem->number_of_cycles}}</td>
                                     </tr>
@@ -44,8 +44,21 @@
                         </div>
 
                         <form action="{{ route('ad.destroy',$ad) }}" method="POST" id="route-appender">
+                            <div class="form-group">
                             @csrf
                             <button type="submit" onclick="return myFunction();" class="btn btn-danger w-24">Delete</button>
+                            </div>
+                        </form>
+
+                        <form action="{{ route('ad.update',$ad) }}" method="POST" id="route-appender">
+                            @csrf
+                            @method('PATCH')
+                            <div class="form-group">
+                                <label class ="col-2">New start time:</label>&nbsp
+                                <input name="addStart" type="datetime-local" required class="col-8"/>
+                                <button type="submit" class="btn btn-primary justify-content-end">Update</button>
+                            </div>
+
                         </form>
 
 

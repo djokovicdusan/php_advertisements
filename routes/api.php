@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-//Route::get('/ads', [\App\Http\Controllers\Api\AdController::class, 'index'])->middleware('auth:sanctum');
-Route::get('/ads', [\App\Http\Controllers\Api\AdController::class, 'index'])->name('ads');
+Route::get('/ads', [\App\Http\Controllers\Api\AdController::class, 'index'])->middleware('auth:sanctum');
+//Route::get('/ads', [\App\Http\Controllers\Api\AdController::class, 'index'])->name('ads');
 
 Route::post('/login', [\App\Http\Controllers\Api\UserController::class, 'login'])->name('login');
 Route::post('/register', [\App\Http\Controllers\Api\UserController::class, 'register'])->name('register');

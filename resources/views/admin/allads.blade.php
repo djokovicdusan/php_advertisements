@@ -34,18 +34,14 @@
         <div class="row">
             <!-- Dynamic Table Full Pagination -->
             <div class="block col-sm-11">
-                {{--<div class="block-header">--}}
-                {{--<h3 class="block-title">Dynamic Table--}}
-                {{--<small>Full pagination</small>--}}
-                {{--</h3>--}}
-                {{--</div>--}}
+
                 <div class="block-content block-content-full">
 {{--                    {!! Form::open(array('method' => 'DELETE', 'id' => 'userForm', 'role' => 'form')) !!}--}}
 {{--                    {!! Form::submit(null, ['id' => 'userButton', 'class' => 'btn btn-primary createEditButton', 'style' => 'display: none;']) !!}--}}
 {{--                    {!! Form::close() !!}--}}
                     <div class="dataTables_scroll">
                         <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _es6/pages/be_tables_datatables.js -->
-                        <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination showCursor" id="table">
+                        <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination" id="table">
                             <thead>
                             <tr>
                                 <th class="text-center">ID</th>
@@ -90,3 +86,9 @@
             crossorigin="anonymous"></script>
     <script src="{{asset('js/ads.js')}}"></script>
 
+
+<style>
+    #table{
+        cursor: pointer;
+    }
+</style>

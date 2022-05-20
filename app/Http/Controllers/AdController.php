@@ -179,5 +179,19 @@ class AdController extends Controller
         Session::flash('success', 'You have successfully deleted the ad!');
         return redirect('/ads');
     }
+    public function update(Ad $ad,Request $request)
+    {
+//        dd($request->get('addStart'));
+        $secondsToAdd = Carbon::parse($ad->end_time)->diffInSeconds(Carbon::parse($ad->start_time));
+//        dd(Carbon::parse($ad->start_time));
+//        dd($secondsToAdd);
+//        $ad->update($ad);
+        $start_time = $request->get('addStart');
+        $end_time = Carbon::parse($request->get('addStart'))->addSeconds($secondsToAdd);
+        $ad->start_time = $start_time;
+        $ad->end_time= $end_time;
+        $ad->update();
+        return redirect('/ads');
+    }
 
 }
