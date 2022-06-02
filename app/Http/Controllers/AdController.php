@@ -174,6 +174,11 @@ class AdController extends Controller
     public function destroy(Ad $ad)
     {
 //        dd($ad);
+        $adsAdItemsToDelete = $ad->adsAdItem();
+        foreach ($adsAdItemsToDelete as $item){
+           $item->ads()->detach();
+           $item->delete();
+        }
         $ad->delete();
 
         Session::flash('success', 'You have successfully deleted the ad!');
