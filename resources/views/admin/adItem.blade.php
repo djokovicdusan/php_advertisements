@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Ad') }}
+            {{ __('Upload new advertisement') }}
         </h2>
     </x-slot>
 
@@ -16,7 +16,7 @@
                             </div>
                             <div class="block-content  block-content-full">
                                 <form method="POST" action="{{route('adItem.store')}}" class="form-horizontal"
-                                      enctype="multipart/form-data" >
+                                      enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="type_id" id="videoButton"
@@ -37,10 +37,10 @@
                                     <div id="videoWrapper" class="block-content mt-5">
                                         <div class="form-group col-md-12">
                                             <label>Name:</label>&nbsp
-                                            <input name="videoName"  type="text" class="form-control"/>
+                                            <input name="videoName" type="text" class="form-control"/>
                                         </div>
                                         <div class="form-group">
-                                            <input id="videoFile" data-classbutton="btn"  data-input="false" type="file"
+                                            <input id="videoFile" data-classbutton="btn" data-input="false" type="file"
                                                    accept="video/*" name="videoFile">
                                         </div>
                                         <div class="form-group mt-5">
@@ -68,13 +68,17 @@
 
                                         </div>
                                         <div class="form-group">
-                                            <button type="button" style="cursor:pointer" class="btn-primary form-control">Add new
+                                            <button type="button" style="cursor:pointer "
+                                                    class="btn btn-primary">Add new
                                             </button>
                                         </div>
 
 
                                     </div>
-                                    <input type="submit" class="btn btn-success form-control">
+                                    <div class="form-group">
+                                        <input type="submit" style = "float: right; margin-bottom: 5%" class="btn btn-success">
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -85,8 +89,8 @@
     </div>
 </x-app-layout>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
 {{--    {!! Html::script('/js/adItem.js') !!}--}}

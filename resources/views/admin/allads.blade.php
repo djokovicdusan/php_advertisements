@@ -25,7 +25,7 @@
 
         <div class="row">
             <div class="col-sm-6 col-xl-4">
-                <button type="button" id="goToCreate" class="btn btn-primary">Add Advertisment</button>
+                <button type="button" id="goToCreate" class="btn btn-primary">Create Advertisement</button>
             </div>
         </div>
 

@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('adItem')" :active="request()->routeIs('adItem')">
-                        {{ __('Ad') }}
+                        {{ __('Upload') }}
                     </x-nav-link>
                 </div>
 
@@ -83,7 +83,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('adItem')" :active="request()->routeIs('adItem')">
-                {{ __('Ad') }}
+                {{ __('Upload') }}
             </x-responsive-nav-link>
         </div>
 
