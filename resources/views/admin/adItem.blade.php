@@ -18,32 +18,37 @@
                                 <form method="POST" action="{{route('adItem.store')}}" class="form-horizontal"
                                       enctype="multipart/form-data">
                                     @csrf
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type_id" id="videoButton"
-                                               value="1"
-                                               onclick="typeCheckChanged()" checked>
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Video
-                                        </label>
+                                    <div class="form-group col-md-12">
+                                        <label>Type:</label>&nbsp
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="type_id" id="videoButton"
+                                                   value="1"
+                                                   onclick="typeCheckChanged()" checked>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                                Video
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="type_id" id="slideshowButton"
+                                                   value="2"
+                                                   onclick="typeCheckChanged()">
+                                            <label class="form-check-label" for="exampleRadios2">
+                                                SlideShow
+                                            </label>
+                                        </div>
+
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type_id" id="slideshowButton"
-                                               value="2"
-                                               onclick="typeCheckChanged()">
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            SlideShow
-                                        </label>
-                                    </div>
+
                                     <div id="videoWrapper" class="block-content mt-5">
                                         <div class="form-group col-md-12">
                                             <label>Name:</label>&nbsp
                                             <input name="videoName" type="text" class="form-control"/>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group col-md-12">
                                             <input id="videoFile" data-classbutton="btn" data-input="false" type="file"
                                                    accept="video/*" name="videoFile">
                                         </div>
-                                        <div class="form-group mt-5">
+                                        <div class="form-group col-md-12">
                                             <label>Duration:</label>&nbsp
                                             <label id="videoDuration"></label>
                                         </div>
@@ -67,7 +72,7 @@
                                             <br><br>
 
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group col-md-12">
                                             <button type="button" style="cursor:pointer "
                                                     class="btn btn-primary">Add new
                                             </button>
@@ -75,8 +80,8 @@
 
 
                                     </div>
-                                    <div class="form-group">
-                                        <input type="submit" style = "float: right; margin-bottom: 5%" class="btn btn-success">
+                                    <div class="form-group col-md-12 d-flex flex-row-reverse ">
+                                        <input type="submit" style = "margin-bottom: 1%" class="btn btn-success">
                                     </div>
 
                                 </form>

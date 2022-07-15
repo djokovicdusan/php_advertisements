@@ -47,5 +47,5 @@ function setFileInfo() {
 
 }
 $(".btn-primary").on('click',function(){
-    $("#uploader").append('<div class="form-group"><input id="imageFile1" required name="images[]" data-classbutton="btn" data-input="false" type="file"></div>');
+    $("#uploader").append('<div class="form-group col-md-12"><input id="imageFile1" required name="images[]" data-classbutton="btn" data-input="false" type="file"></div>');
 });
