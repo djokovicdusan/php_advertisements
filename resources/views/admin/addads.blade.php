@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Create new advertisement block') }}
         </h2>
     </x-slot>
 
@@ -39,16 +39,16 @@
 
 
                             </div>
-                            <div class="block-content">
+                            <div class="form-group col-md-12">
                                 <div class="form-group">
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#Mymodal">
-                                        Select ad items
+                                        Select advertisements(items)
                                     </button>
 
                                     <a href="{{url("ads/adItem")}}">
                                         <button type="button" class="btn btn-primary">
-                                            Upload ad items
+                                            Upload advertisements(items)
                                         </button>
                                     </a>
                                 </div>
@@ -111,7 +111,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <div class="form-group col-md-12 d-flex flex-row-reverse ">
+                                <input type="submit" style = "margin-bottom: 1%" class="btn btn-success">
+                            </div>
                         </form>
                     </div>
                 </div>
