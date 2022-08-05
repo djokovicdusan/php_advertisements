@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Ads') }}
+            {{ __('Advertisements') }}
         </h2>
     </x-slot>
 
@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-xl-4">
                                 {{--                <button type="button" id="goToCarousel" class="btn btn-primary">Go to Carousel</button>--}}
-                                <a href="{{route('carousel')}}" class="btn btn-primary">Go to Carousel</a>
+                                <a href="{{route('carousel')}}" class="btn btn-primary" target="_blank">Go to Carousel</a>
                             </div>
                         </div>
 

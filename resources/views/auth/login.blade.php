@@ -1,8 +1,10 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            <a href="{{ route('login') }}">
+{{--                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />--}}
+                <img class="block h-10 w-auto"
+                     src="{{asset('https://showdown-poker.ch/assets/img/logo/showdown.png')}}">
             </a>
         </x-slot>
 

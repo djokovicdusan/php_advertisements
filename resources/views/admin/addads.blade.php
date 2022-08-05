@@ -46,11 +46,11 @@
                                         Select advertisements(items)
                                     </button>
 
-                                    <a href="{{url("ads/adItem")}}">
-                                        <button type="button" class="btn btn-primary">
-                                            Upload advertisements(items)
-                                        </button>
-                                    </a>
+{{--                                    <a href="{{url("ads/adItem")}}" >--}}
+{{--                                        <button type="button" class="btn btn-primary">--}}
+{{--                                            Upload advertisements(items)--}}
+{{--                                        </button>--}}
+{{--                                    </a>--}}
                                 </div>
                             </div>
 
@@ -74,13 +74,14 @@
                                             <div class="modal-body" style="width: 750px; margin: auto">
 
                                                 <table id="tableItems" class="table  table-bordered"
-                                                       style="width:100%; table-layout: fixed; overflow: hidden">
+                                                       style="width:100%;  overflow: hidden; cursor: pointer">
                                                     <thead>
                                                     <th>Name</th>
                                                     <th>Type</th>
                                                     <th>Duration / No of cycles</th>
                                                     <th hidden>Id</th>
                                                     <th>Created at</th>
+                                                    <th>Preview</th>
 
                                                     </thead>
                                                     <tbody>
@@ -93,6 +94,12 @@
                                                             <td>{{ $adItem->duration }} </td>
                                                             <td hidden>{{ $adItem->id }} </td>
                                                             <td>{{ $adItem->created_at }} </td>
+                                                            <td>
+                                                                @if($adItem->type_id == 1)
+                                                                    <a href="{{asset('/assets/ads/video/'.$adItem->file_name)}}" target="_blank">Preview</a>
+                                                                @else <a href="{{route('slideshow.preview',['adItem'=>$adItem])}}" target="_blank">Preview</a>
+                                                                @endif
+                                                            </td>
                                                         </tr>
 
                                                     @endforeach
@@ -112,7 +119,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12 d-flex flex-row-reverse ">
-                                <input type="submit" style = "margin-bottom: 1%" class="btn btn-success">
+                                <input type="submit" style="margin-bottom: 1%" class="btn btn-success">
                             </div>
                         </form>
                     </div>

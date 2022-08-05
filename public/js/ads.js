@@ -151,7 +151,7 @@ $("#btnForGenerate").click(function () {
 var table = $(".js-dataTable-full-pagination").DataTable({
     aaSorting: [],
     pagingType: "simple_numbers",
-    pageLength: 20,
+    pageLength: 10,
     lengthMenu: [[10, 20, 30, 40, 50], [10, 20, 30, 40, 50]],
     autoWidth: 1,
     scrollX: false

@@ -1,8 +1,10 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>
+            <a href="{{ route('register') }}">
+{{--                <x-application-logo class="w-20 h-20 fill-current text-gray-500"/>--}}
+                <img class="block h-10 w-auto"
+                     src="{{asset('https://showdown-poker.ch/assets/img/logo/showdown.png')}}">
             </a>
         </x-slot>
 
@@ -12,14 +14,15 @@
         <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- first Name -->
+            <!-- First Name -->
             <div>
                 <x-label for="first_name" :value="__('First Name')"/>
 
                 <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
                          :value="old('first_name')" required autofocus/>
-            </div>            <!-- last Name -->
-            <div>
+            </div>
+            <!-- last Name -->
+            <div class="mt-4">
                 <x-label for="last_name" :value="__('Last Name')"/>
 
                 <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')"

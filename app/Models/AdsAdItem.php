@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdsAdItem extends Model
 {
     //
-    protected $fillable = ['ad_item_id', 'ad_id', 'number_of_cycles', 'position'];
+    protected $fillable = ['ad_item_id', 'ad_id', 'number_of_cycles','startsFromSecond','duration_in_ad', 'position'];
     protected $with = ['adItem'];
     protected $appends = ['duration'];
 

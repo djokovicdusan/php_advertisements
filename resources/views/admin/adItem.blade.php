@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Upload new advertisement') }}
+            {{ __('Upload new advertisement(item)') }}
         </h2>
     </x-slot>
 
@@ -19,7 +19,7 @@
                                       enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group col-md-12">
-                                        <label>Type:</label>&nbsp
+                                        <label>Choose type:</label>&nbsp
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="type_id" id="videoButton"
                                                    value="1"
@@ -29,7 +29,8 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="type_id" id="slideshowButton"
+                                            <input class="form-check-input" type="radio" name="type_id"
+                                                   id="slideshowButton"
                                                    value="2"
                                                    onclick="typeCheckChanged()">
                                             <label class="form-check-label" for="exampleRadios2">
@@ -48,10 +49,24 @@
                                             <input id="videoFile" data-classbutton="btn" data-input="false" type="file"
                                                    accept="video/*" name="videoFile">
                                         </div>
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-12" id="durationWrapper">
                                             <label>Duration:</label>&nbsp
                                             <label id="videoDuration"></label>
                                         </div>
+                                        <div class="form-group col-md-12" id="progressBarWrapper">
+                                            <div class="progress" id="progress_bar"
+                                                 style="display:none;height:50px; line-height: 50px;">
+
+                                                <div class="progress-bar " id="progress_bar_process" role="progressbar"
+                                                     style="width:0%;">0%
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12" id="">
+                                            <div id="uploadedFileSuccess"></div>
+                                        </div>
+
 
                                     </div>
                                     <div id="slideshowWrapper" class="block-content mt-5">
@@ -80,8 +95,8 @@
 
 
                                     </div>
-                                    <div class="form-group col-md-12 d-flex flex-row-reverse ">
-                                        <input type="submit" style = "margin-bottom: 1%" class="btn btn-success">
+                                    <div class="form-group col-md-12 d-flex flex-row-reverse">
+                                        <input id ="inputSubmit" type="submit" style="margin-bottom: 1%" class="btn btn-success">
                                     </div>
 
                                 </form>

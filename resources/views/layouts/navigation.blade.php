@@ -6,7 +6,9 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('adItem') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600"/>
+                        {{--                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600"/>--}}
+                        <img class="block h-10 w-auto"
+                             src="{{asset('https://showdown-poker.ch/assets/img/logo/showdown.png')}}">
                     </a>
                 </div>
 
@@ -19,14 +21,19 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('ads')" :active="request()->routeIs('ads')">
-                        {{ __('All ads') }}
+                        {{ __('All advertisements') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">
-                        {{ __('Statistics') }}
+                    <x-nav-link :href="route('ads.createComplex')" :active="request()->routeIs('ads.createComplex')">
+                        {{ __('Create complex ads') }}
                     </x-nav-link>
                 </div>
+{{--                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">--}}
+{{--                    <x-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">--}}
+{{--                        {{ __('Statistics') }}--}}
+{{--                    </x-nav-link>--}}
+{{--                </div>--}}
             </div>
 
             <!-- Settings Dropdown -->
@@ -89,16 +96,16 @@
 
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('ads')" :active="request()->routeIs('ads')">
-                {{ __('All ads') }}
+                {{ __('All advertisements') }}
             </x-responsive-nav-link>
         </div>
-        >
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">
-                {{ __('Statistics') }}
-            </x-responsive-nav-link>
-        </div>
-        >
+{{--        >--}}
+{{--        <div class="pt-2 pb-3 space-y-1">--}}
+{{--            <x-responsive-nav-link :href="route('statistics')" :active="request()->routeIs('statistics')">--}}
+{{--                {{ __('Statistics') }}--}}
+{{--            </x-responsive-nav-link>--}}
+{{--        </div>--}}
+{{--        >--}}
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

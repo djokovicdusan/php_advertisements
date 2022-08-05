@@ -50,16 +50,23 @@
                             </div>
                         </form>
 
-                        <form action="{{ route('ad.update',$ad) }}" method="POST" id="route-appender">
+                        <form action="{{ route('ad.duplicate',$ad) }}" method="POST" id="route-appender">
                             @csrf
-                            @method('PATCH')
                             <div class="form-group">
                                 <label class ="col-2">New start time:</label>&nbsp
                                 <input name="addStart" type="datetime-local" required class="col-8"/>
-                                <button type="submit" class="btn btn-primary justify-content-end">Update</button>
+                                <button type="submit" class="btn btn-primary justify-content-end">Duplicate current ad</button>
                             </div>
-
                         </form>
+{{--                        <form action="{{ route('ad.update',$ad) }}" method="POST" id="route-appender">--}}
+{{--                            @csrf--}}
+{{--                            @method('PATCH')--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label class ="col-2">New start time:</label>&nbsp--}}
+{{--                                <input name="addStart" type="datetime-local" required class="col-8"/>--}}
+{{--                                <button type="submit" class="btn btn-primary justify-content-end">Update</button>--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
 
 
                         {{--        <a href="{{ route('adItem')}}" class="btn btn-primary">Ad item</a>--}}
