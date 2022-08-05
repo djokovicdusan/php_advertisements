@@ -33,12 +33,13 @@ $(document).ready(function () {
         selectedItem.empty()
         selectedItem.append(`
             <div class='uploadDoc' style ='width:100%'>
-                <div class='col-sm-6' style ='display: inline-block'> ${noviItem[0].innerHTML}(${noviItem[2].innerHTML} seconds)</div>
-                <div class="col-sm-4" style ='display: inline-block'>
-                    <input required type="number" class="form-control" name="cycles[]" placeholder="No of cycles" >
-                </div>
-                <input type="text"  id="itemId${noOfSelectedItems}" value="${noviItem[3].innerHTML}" class="itemIds"   name="itemIds[]" hidden>
+                <div class='col-sm-7' style ='display: inline-block'> ${noviItem[0].innerHTML}(${noviItem[2].innerHTML} seconds)</div>
+                <div class="col-sm-2" style ='display: inline-block'>
+                    <input required type="number" class="form-control" hidden value="1" name="cycles[]" placeholder="No of cycles" >
+                                <input type="text"  id="itemId${noOfSelectedItems}" value="${noviItem[3].innerHTML}" class="itemIds"   name="itemIds[]" hidden>
                 <input required type="number" onmouseover="" value="0" class="form-control" name="seconds[]" placeholder="Start at second" hidden >
+                </div>
+
 
 
                  <div class="col-sm-1"  style ='display: inline-block; cursor: pointer'>
