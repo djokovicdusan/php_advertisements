@@ -30,13 +30,11 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Main advertisement(item):</label>&nbsp
-                                    <div class = "row">
-                                        <div class="uploadDoc" id="mainItem">
 
-                                        </div>
-
+                                    <div class="uploadDoc row" id="mainItem">
 
                                     </div>
+
 
                                 </div>
 
@@ -196,9 +194,9 @@
                                     </div>
                                 </div>
                             </div>
-                                                        <div class="form-group col-md-12 d-flex flex-row-reverse ">
-                                                            <input type="submit" style="margin-bottom: 1%" class="btn btn-success">
-                                                        </div>
+                            <div class="form-group col-md-12 d-flex flex-row-reverse ">
+                                <input type="submit" style="margin-bottom: 1%" class="btn btn-success">
+                            </div>
                         </form>
                     </div>
                 </div>
