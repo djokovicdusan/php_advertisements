@@ -44,9 +44,7 @@ class AdItemController extends Controller
                 'videoName'=>'string|required',
                 'duration'=> 'required'
             ]);
-            if($validator->fails()){
-                redirect()->back();
-            }
+
             $duration = $request->get('duration');
             $file = $request->file('videoFile');
 
@@ -80,9 +78,7 @@ class AdItemController extends Controller
                 'duration'=>'required',
                 'images'=>'required'
             ]);
-            if($validator->fails()){
-                redirect()->back();
-            }
+
             $images = $request->file('images');
 //            dd($images);
             $name = $request->get('slideshowName');

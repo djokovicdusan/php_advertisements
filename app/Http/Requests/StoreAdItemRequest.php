@@ -20,7 +20,9 @@ class StoreAdItemRequest extends \Illuminate\Foundation\Http\FormRequest
         // voditi racuna o tome sta je zaista required
         return [
             'name' => 'required',
-            'type_id' => 'required'
+            'type_id' => 'required',
+            'duration'=> 'required'
+
 
         ];
     }
