@@ -37,7 +37,7 @@ class AdController extends Controller
     public function addAds()
     {
         $aditems = AdItem::all();
-        return view('admin/addads', ['active' => 'ads', 'adItems' => $aditems]);
+        return view('admin/createSimpleAds', ['active' => 'ads', 'adItems' => $aditems]);
     }
 
     public function createComplexAds()

@@ -103,7 +103,7 @@
 
                                                         <tr>
                                                             <td>{{ $adItem->file_name }} </td>
-                                                            <td>{{ $adItem->type_id }} </td>
+                                                            <td>{{ $adItem->type_id == 1 ? "Video" : "Slideshow" }} </td>
                                                             <td>{{ $adItem->duration }} </td>
                                                             <td hidden>{{ $adItem->id }} </td>
                                                             <td>{{ $adItem->created_at }} </td>
@@ -163,7 +163,7 @@
 
                                                         <tr>
                                                             <td>{{ $adItem->file_name }} </td>
-                                                            <td>{{ $adItem->type_id }} </td>
+                                                            <td>{{ $adItem->type_id == 1 ? "Video" : "Slideshow" }} </td>
                                                             <td>{{ $adItem->duration }} </td>
                                                             <td hidden>{{ $adItem->id }} </td>
                                                             <td>{{ $adItem->created_at }} </td>

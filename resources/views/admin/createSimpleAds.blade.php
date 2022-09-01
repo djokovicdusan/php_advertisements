@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create new advertisement block') }}
         </h2>
+
     </x-slot>
 
     <div class="py-12">
@@ -90,7 +91,7 @@
 
                                                         <tr>
                                                             <td>{{ $adItem->file_name }} </td>
-                                                            <td>{{ $adItem->type_id }} </td>
+                                                            <td>{{ $adItem->type_id == 1 ? "Video" : "Slideshow" }} </td>
                                                             <td>{{ $adItem->duration }} </td>
                                                             <td hidden>{{ $adItem->id }} </td>
                                                             <td>{{ $adItem->created_at }} </td>
