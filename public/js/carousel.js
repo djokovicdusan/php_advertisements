@@ -39,8 +39,13 @@ $(document).ready(function () {
      // document.getElementById("videoCarousel").controls=false;
     // document.getElementById("videoCarousel").style.width = window.innerWidth;
     // document.getElementById("videoCarousel").style.height = window.innerHeight;
+
      document.getElementById("videoCarousel").requestFullscreen();
+
+
     // videoCarousel.onloadeddata = function () {
+
+
     //
     //     console.log("ucitan video")
     //     $.ajax({

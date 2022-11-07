@@ -26,7 +26,7 @@
 <input id="refreshIntervalMilliSeconds" type="number" value="{{$refreshIntervalMilliSeconds}}" hidden>
 <input id="carouselStartTime" type="number" value="{{$adItemStartTime}}" hidden>
 <input id="carouselStartTimeMilliSeconds" type="number" value="{{$adItemStartTimeMilliSeconds}}" hidden>
-<input id="adItemName" type="number" value="{{$adItem->file_name}}" hidden>
+<input id="adItemName" type="text" value="{{$adItem->file_name}}" hidden>
 
 
 @if($adItem->type_id == 1)

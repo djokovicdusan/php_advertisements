@@ -199,7 +199,9 @@ class AdController extends Controller
     public function carousel(Request $request)
     {
 //        dd("asd");
-        $now = Carbon::now()->addHours(2);
+        $now = Carbon::now()->addHours(1);
+
+
 
         $ad = Ad::where('start_time', '<=', $now)->where('end_time', '>', $now)->first();
 
