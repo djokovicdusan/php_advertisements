@@ -199,10 +199,9 @@ class AdController extends Controller
     public function carousel(Request $request)
     {
 //        dd("asd");
-        $now = Carbon::now()->addHours(1);
-
-
-
+//        $now = Carbon::now()->addHours(1);
+        $now = Carbon::now("Europe/Belgrade");
+//        dd($now);
         $ad = Ad::where('start_time', '<=', $now)->where('end_time', '>', $now)->first();
 
         if ($ad == null) {
@@ -211,8 +210,8 @@ class AdController extends Controller
 
             return view('admin/carousel', ['ad' => $ad, 'adsAdItem' => $ad->adsAdItem[0], 'adItem' => $ad->adsAdItem[0]->adItem,
                 'refreshInterval' => $ad->adsAdItem[0]->adItem->duration, 'adItemStartTime' => 0,
-                'refreshIntervalMilliSeconds' => $ad->adsAdItem[0]->adItem->duration*1000,
-                'adItemStartTimeMilliSeconds'=>0*1000, 'ads']);
+                'refreshIntervalMilliSeconds' => $ad->adsAdItem[0]->adItem->duration * 1000,
+                'adItemStartTimeMilliSeconds' => 0 * 1000, 'ads']);
         }
 //        dd($ad->adsAdItem[0]->adItem);
 //        dd($ad);
@@ -235,14 +234,14 @@ class AdController extends Controller
             $currentItemStartTimeMilliSeconds = $sumOfMilliSeconds;
 //            $sumOfSeconds += $adsAdItemDuration;
             $sumOfSeconds += $durationInAd;
-            $sumOfMilliSeconds+=($durationInAd*1000);
+            $sumOfMilliSeconds += ($durationInAd * 1000);
             //ako je poslednja reklama dodaj joj 2 sekunde
 
             if (++$i === $numItems) {
 //                $sumOfSeconds += $adsAdItemDuration + 2;
                 $lastItem = true;
             }
-            if($key != 0){
+            if ($key != 0) {
                 $firstItem = false;
             }
 
@@ -261,7 +260,7 @@ class AdController extends Controller
                 //fucking magic formula
 //                $adsAdItemStartTime = ($secondsGone - $currentItemStartTime) % ($currentAdItem->duration);
                 $adsAdItemStartTime = (($secondsGone - $currentItemStartTime) % ($currentAdsAdItem->duration_in_ad)) + $currentAdsAdItem->startsFromSecond;
-                $adsAdItemStartTimeMilliSeconds = (($millisecondsGone - $currentItemStartTimeMilliSeconds) % ($currentAdsAdItem->duration_in_ad * 1000)) + $currentAdsAdItem->startsFromSecond*1000;
+                $adsAdItemStartTimeMilliSeconds = (($millisecondsGone - $currentItemStartTimeMilliSeconds) % ($currentAdsAdItem->duration_in_ad * 1000)) + $currentAdsAdItem->startsFromSecond * 1000;
                 $adsAdItemDurationCarousel = $sumOfSeconds - $secondsGone;
                 $adsAdItemDurationCarouselMilliSeconds = $sumOfMilliSeconds - $millisecondsGone;
 //                    dd($adsAdItemStartTime);
@@ -273,40 +272,37 @@ class AdController extends Controller
 //        dd($adItem);
         if ($lastItem) {
             $adsAdItemDurationCarousel += 2;
-            $adsAdItemDurationCarouselMilliSeconds+=1000;
-            if($currentAdItem->type_id == 2){
+            $adsAdItemDurationCarouselMilliSeconds += 1000;
+            if ($currentAdItem->type_id == 2) {
                 $adsAdItemDurationCarousel += 1;
-                $adsAdItemDurationCarouselMilliSeconds+=1000;
+                $adsAdItemDurationCarouselMilliSeconds += 1000;
             }
-            $adsAdItemStartTime-=1.6;
-            $adsAdItemStartTimeMilliSeconds-=300;
-        }
-        else{
+            $adsAdItemStartTime -= 1.6;
+            $adsAdItemStartTimeMilliSeconds -= 300;
+        } else {
 
-            if($currentAdsAdItem->number_of_cycles >1){
-                $adsAdItemDurationCarousel += (0.8*$currentAdsAdItem->number_of_cycles);
-            }
-            else{
+            if ($currentAdsAdItem->number_of_cycles > 1) {
+                $adsAdItemDurationCarousel += (0.8 * $currentAdsAdItem->number_of_cycles);
+            } else {
                 $adsAdItemDurationCarousel += 1.2;
             }
-            $adsAdItemDurationCarouselMilliSeconds += 300*($currentAdsAdItem->number_of_cycles);
+            $adsAdItemDurationCarouselMilliSeconds += 300 * ($currentAdsAdItem->number_of_cycles);
 
             // remove this the moment you fix refresh interval on default ad;
-            if($firstItem){
-                $adsAdItemStartTime+=1.6;
+            if ($firstItem) {
+                $adsAdItemStartTime += 1.6;
                 $adsAdItemStartTimeMilliSeconds += 500;
                 //slideshow
 //                if($currentAdItem->type_id == 2){
 //                    $adsAdItemDurationCarousel -= 1.5;
 //                }
-            }
-            else{
-                $adsAdItemStartTime-=1.6;
-                $adsAdItemStartTimeMilliSeconds-=300;
+            } else {
+                $adsAdItemStartTime -= 1.6;
+                $adsAdItemStartTimeMilliSeconds -= 300;
                 //slideshow
-                if($currentAdItem->type_id == 2){
+                if ($currentAdItem->type_id == 2) {
                     $adsAdItemDurationCarousel += 1.5;
-                    $adsAdItemStartTimeMilliSeconds+=300;
+                    $adsAdItemStartTimeMilliSeconds += 300;
                 }
             }
 
@@ -317,7 +313,7 @@ class AdController extends Controller
             return (['refreshInterval' => $adsAdItemDurationCarousel, 'adItemStartTime' => $adsAdItemStartTime]);
         }
         return view('admin/carousel', ['adItem' => $currentAdItem, 'adsAdItem' => $currentAdsAdItem, 'refreshInterval' => $adsAdItemDurationCarousel,
-            'refreshIntervalMilliSeconds' => $adsAdItemDurationCarouselMilliSeconds,'adItemStartTime' => $adsAdItemStartTime,
+            'refreshIntervalMilliSeconds' => $adsAdItemDurationCarouselMilliSeconds, 'adItemStartTime' => $adsAdItemStartTime,
             'adItemStartTimeMilliSeconds' => $adsAdItemStartTimeMilliSeconds]);
     }
 
