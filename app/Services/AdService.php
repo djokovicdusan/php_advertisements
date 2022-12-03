@@ -18,6 +18,80 @@ class AdService
         $cycles = $request->get('cycles');
         $seconds = $request->get('seconds');
 
+
+        list($sumOfDurations, $allDurationsInSeconds, $itemPositions, $itemCycles, $itemStartsAtSeconds) = $this->calculateComplexSumOfDurations($itemIds, $cycles, $seconds);
+        $ad = Ad::create([
+            'name' => $request->get('addName'),
+            'start_time' => $request->get('addStart'),
+            'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
+        ]);
+
+        foreach ($itemPositions as $key => $itemId) {
+
+
+            AdsAdItem::create([
+                'ad_item_id' => $itemId,
+                'ad_id' => $ad->id,
+                'startsFromSecond' => $itemStartsAtSeconds[$key],
+                'number_of_cycles' => $itemCycles[$key],
+                'duration_in_ad' => $allDurationsInSeconds [$key],
+                'position' => $key
+
+            ]);
+        }
+    }
+
+    public function storeSimpleAds(Request $request)
+    {
+        $itemIds = $request->get('itemIds');
+        $itemCycles = $request->get('cycles');
+
+        list($sumOfDurations, $allDurationsInSeconds) = $this->calculateSimpleSumOfDurations($itemIds, $itemCycles);
+
+
+        $ad = Ad::create([
+            'name' => $request->get('addName'),
+            'start_time' => $request->get('addStart'),
+            'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
+        ]);
+
+        foreach ($itemIds as $key => $itemId) {
+
+
+            AdsAdItem::create([
+                'ad_item_id' => $itemId,
+                'ad_id' => $ad->id,
+                'startsFromSecond' => 0,
+                'duration_in_ad' => $allDurationsInSeconds[$key],
+                'number_of_cycles' => $itemCycles[$key],
+                'position' => $key
+
+            ]);
+        }
+    }
+
+    public function calculateSimpleSumOfDurations(array $itemIds, array $itemCycles)
+    {
+        $sumOfDurations = 0;
+        foreach ($itemIds as $key => $itemId) {
+            $adItem = AdItem::find($itemId);
+            $duration = $adItem->duration;
+            $number_of_cycles = $itemCycles[$key];
+            if ($adItem->type_id == 2) {
+                $numberOfPhotos = count(Storage::disk('public')->allFiles('ads/slideshows/' . $adItem->file_name));
+                $adsAdItemDuration = $duration * $number_of_cycles * $numberOfPhotos;
+            } else {
+                $adsAdItemDuration = $duration * $number_of_cycles;
+            }
+            $allDurationsInSeconds [] = $adsAdItemDuration;
+            $sumOfDurations += $adsAdItemDuration;
+        }
+
+        return [$sumOfDurations, $allDurationsInSeconds];
+    }
+
+    public function calculateComplexSumOfDurations(array $itemIds, array $cycles, array $seconds)
+    {
         $sumOfDurations = 0;
         $itemIdCounter = 1;
         for ($i = 0; $i < 2 * count($itemIds) - 1; $i++) {
@@ -66,69 +140,9 @@ class AdService
             $sumOfDurations += $adsAdItemDuration;
         }
 
-
-        $ad = Ad::create([
-            'name' => $request->get('addName'),
-            'start_time' => $request->get('addStart'),
-            'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
-        ]);
-
-        foreach ($itemPositions as $key => $itemId) {
-
-
-            AdsAdItem::create([
-                'ad_item_id' => $itemId,
-                'ad_id' => $ad->id,
-                'startsFromSecond' => $itemStartsAtSeconds[$key],
-                'number_of_cycles' => $itemCycles[$key],
-                'duration_in_ad' => $allDurationsInSeconds [$key],
-                'position' => $key
-
-            ]);
-        }
+        return [$sumOfDurations, $allDurationsInSeconds, $itemPositions, $itemCycles, $itemStartsAtSeconds];
     }
 
-    public function storeSimpleAds(Request $request)
-    {
-        $itemIds = $request->get('itemIds');
-        $itemCycles = $request->get('cycles');
-
-        $sumOfDurations = 0;
-        foreach ($itemIds as $key => $itemId) {
-            $adItem = AdItem::find($itemId);
-            $duration = $adItem->duration;
-            $number_of_cycles = $itemCycles[$key];
-            if ($adItem->type_id == 2) {
-                $numberOfPhotos = count(Storage::disk('public')->allFiles('ads/slideshows/' . $adItem->file_name));
-                $adsAdItemDuration = $duration * $number_of_cycles * $numberOfPhotos;
-            } else {
-                $adsAdItemDuration = $duration * $number_of_cycles;
-            }
-            $allDurationsInSeconds [] = $adsAdItemDuration;
-            $sumOfDurations += $adsAdItemDuration;
-        }
-
-        $ad = Ad::create([
-            'name' => $request->get('addName'),
-            'start_time' => $request->get('addStart'),
-            'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
-        ]);
-
-
-        foreach ($itemIds as $key => $itemId) {
-
-
-            AdsAdItem::create([
-                'ad_item_id' => $itemId,
-                'ad_id' => $ad->id,
-                'startsFromSecond' => 0,
-                'duration_in_ad' => $allDurationsInSeconds[$key],
-                'number_of_cycles' => $itemCycles[$key],
-                'position' => $key
-
-            ]);
-        }
-    }
 
     public function destroyAd(Ad $ad)
     {
