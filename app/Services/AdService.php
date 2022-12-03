@@ -7,6 +7,7 @@ use App\Models\AdItem;
 use App\Models\AdsAdItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AdService
@@ -20,25 +21,31 @@ class AdService
 
 
         list($sumOfDurations, $allDurationsInSeconds, $itemPositions, $itemCycles, $itemStartsAtSeconds) = $this->calculateComplexSumOfDurations($itemIds, $cycles, $seconds);
-        $ad = Ad::create([
-            'name' => $request->get('addName'),
-            'start_time' => $request->get('addStart'),
-            'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
-        ]);
-
-        foreach ($itemPositions as $key => $itemId) {
 
 
-            AdsAdItem::create([
-                'ad_item_id' => $itemId,
-                'ad_id' => $ad->id,
-                'startsFromSecond' => $itemStartsAtSeconds[$key],
-                'number_of_cycles' => $itemCycles[$key],
-                'duration_in_ad' => $allDurationsInSeconds [$key],
-                'position' => $key
+        DB::transaction(function () use ($itemStartsAtSeconds, $itemPositions, $itemIds, $itemCycles, $allDurationsInSeconds, $sumOfDurations, $request) {
 
+            $ad = Ad::create([
+                'name' => $request->get('addName'),
+                'start_time' => $request->get('addStart'),
+                'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
             ]);
-        }
+
+            foreach ($itemPositions as $key => $itemId) {
+
+
+                AdsAdItem::create([
+                    'ad_item_id' => $itemId,
+                    'ad_id' => $ad->id,
+                    'startsFromSecond' => $itemStartsAtSeconds[$key],
+                    'number_of_cycles' => $itemCycles[$key],
+                    'duration_in_ad' => $allDurationsInSeconds [$key],
+                    'position' => $key
+
+                ]);
+            }
+        });
+
     }
 
     public function storeSimpleAds(Request $request)
@@ -48,26 +55,28 @@ class AdService
 
         list($sumOfDurations, $allDurationsInSeconds) = $this->calculateSimpleSumOfDurations($itemIds, $itemCycles);
 
+        DB::transaction(function () use ($itemIds, $itemCycles, $allDurationsInSeconds, $sumOfDurations, $request) {
 
-        $ad = Ad::create([
-            'name' => $request->get('addName'),
-            'start_time' => $request->get('addStart'),
-            'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
-        ]);
-
-        foreach ($itemIds as $key => $itemId) {
-
-
-            AdsAdItem::create([
-                'ad_item_id' => $itemId,
-                'ad_id' => $ad->id,
-                'startsFromSecond' => 0,
-                'duration_in_ad' => $allDurationsInSeconds[$key],
-                'number_of_cycles' => $itemCycles[$key],
-                'position' => $key
-
+            $ad = Ad::create([
+                'name' => $request->get('addName'),
+                'start_time' => $request->get('addStart'),
+                'end_time' => Carbon::parse($request->get('addStart'))->addSeconds($sumOfDurations),
             ]);
-        }
+
+            foreach ($itemIds as $key => $itemId) {
+
+
+                AdsAdItem::create([
+                    'ad_item_id' => $itemId,
+                    'ad_id' => $ad->id,
+                    'startsFromSecond' => 0,
+                    'duration_in_ad' => $allDurationsInSeconds[$key],
+                    'number_of_cycles' => $itemCycles[$key],
+                    'position' => $key
+
+                ]);
+            }
+        });
     }
 
     public function calculateSimpleSumOfDurations(array $itemIds, array $itemCycles)
