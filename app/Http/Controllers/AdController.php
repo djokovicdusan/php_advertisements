@@ -70,7 +70,6 @@ class AdController extends Controller
 
     public function carousel(Request $request)
     {
-//        dd("asd");
         $now = Carbon::now()->addHours(1);
 //        $now = Carbon::now("Europe/Belgrade");
 //        dd($now);

@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AdItemController extends Controller
 {
+    private $adItemService;
+
+    public function __construct(AdItemService $service)
+    {
+        $this->adItemService = $service;
+    }
+
     public function index()
     {
         $aditems = AdItem::all();
@@ -32,14 +39,14 @@ class AdItemController extends Controller
     }
 
 
-    public function store(Request $request, AdItemService $adItemService)
+    public function store(Request $request)
     {
         $typeId = $request->type_id;
 
         if ($typeId == 1) {
-            $adItemService->storeVideo($request);
+            $this->adItemService->storeVideo($request);
         } else if ($typeId == 2) {
-            $adItemService->storeSlideshow($request);
+            $this->adItemService->storeSlideshow($request);
 
         }
         return redirect()->back();
